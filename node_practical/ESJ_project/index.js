@@ -4,6 +4,7 @@ const app = express()
 // const catRoutes = require('./routes/catRoutes')
 const catRoutes = require('./routes/catRoutes')
 const catApiRoutes = require('./routes/catApiRoutes')
+const subcatRoutes = require('./routes/subcatRoutes')
 
 app.set('view engine','ejs')  //pug hbs
 app.use(express.static('public'))
@@ -15,6 +16,7 @@ app.use(express.urlencoded({extended:false}))
 //change get to use and require catRoutes
 app.use("/category",catRoutes)
 app.use("/category/api",catApiRoutes)
+app.use("/subcategory",subcatRoutes)
 
 app.get("/contact",(req,res)=>{
     res.render('contact')
