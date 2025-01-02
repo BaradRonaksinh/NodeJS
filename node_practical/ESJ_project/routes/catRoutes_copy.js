@@ -1,13 +1,13 @@
 const express = require('express')
-const app = express()
+const { ins,disp, delData, editData } = require('../controllers/categoryController_copy')
 
-//what is a use of express router...
+const app = express()
 const router = express.Router()
 
-const {ins,disp,delData,editData} = require('../controllers/subcategoryController')
+
+// all func in router works
 router.get('/',disp)
 router.post('/add',ins)
-// router.post('/upd',upd)
 router.get('/del/:id',delData)
 router.get('/edit/:id',editData)
 

@@ -1,68 +1,41 @@
-const { ObjectId } = require('mongodb');
-const connectToDatabase = require('../models/catModel');
-// create a reuire functions...
-const ins = async (req, res) => {
-    const name = req.body.name    //req.body ?
-    const id = req.body.catid    //req.body ?
-    const db = await connectToDatabase();
-    const collection = db.collection('category')
-    let result
-    if(id!=''){
-        //update
-        let objId = new ObjectId(id)
-        result = await collection.updateOne({_id:objId},{$set:{name}})
-    } else {
-        //insert
-        result = await collection.insertOne({name})
+const catModel = require('../models/catModel');
 
+// create a reuire functions...
+const ins = async(req,res)=>{
+    const id = req.body.catid    //req.body ?
+    let alldata = req.body
+   let result
+    if(id!=''){
+        result = await catModel.findByIdAndUpdate(id,alldata)
+    } else {
+        result = await catModel.create(alldata)
     }
-    // result = await collection.insertOne({ name })
-    if (result) {
+    if(result){
         console.log("Inserted successfully");
         res.redirect('/category')
     }
 }
-const disp = async (req, res) => {
-    const db = await connectToDatabase();
-    const collection = db.collection('category')
-    let data = await collection.find({}).toArray()
-    console.log(data);
-    // console.log(editData);
-    res.render('category', {
-        "catdata": data,
-        "edituser": ''
+const disp = async(req,res)=>{
+    let alldata = await catModel.find({})
+    res.render('category',{
+        "alldata":alldata,
+        "editcat":''
     })
 }
-const delData = async (req, res) => {
+const delData = async(req,res)=>{
     let id = req.params.id
-
-    const db = await connectToDatabase();
-    const collection = db.collection('category')
-    let objectId = new ObjectId(id)
-    console.log(objectId);
-
-    let data = await collection.deleteOne({ _id: objectId })
-    if (data) {
+    let data = await catModel.findByIdAndDelete(id)
+    if(data){
         res.redirect('/category')
     }
 }
-const editData = async (req, res) => {
+const editData = async(req,res)=>{
     let id = req.params.id
-
-    const db = await connectToDatabase();
-    const collection = db.collection('category');
-    let objectID = new ObjectId(id);
-    // console.log(objectID);
-    let data = await collection.find({}).toArray()
-    let editData = await collection.findOne({ _id: objectID });
-    if (data) {
-
-        // render
-        res.render('category', {
-            "catdata": data,
-            "edituser": editData
-        })
-    }
-    console.log(data);
+    let data = await catModel.find({})
+    let editdata = await catModel.findById(id)
+    res.render('category',{
+        "alldata":data,
+        "editcat":editdata
+    })
 }
-module.exports = { ins, disp, delData, editData }
+module.exports = {ins,disp,delData,editData}

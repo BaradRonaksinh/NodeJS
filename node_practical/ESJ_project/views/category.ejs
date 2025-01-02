@@ -31,14 +31,12 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-
-              <!-- FORM FOR ADDING A DATA  ******* -->
               <form action="/category/add" method="post">
-                <input type="hidden" name="catid" value="<%= (edituser!='')?edituser._id:'' %>">
+                <input type="hidden" name="catid" value="<%= (editcat!='')?editcat._id:'' %>">
                 <div class="card-body">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Category Name</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter category" name="name" value="<%= (edituser!='')?edituser.name:'' %>">
+                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter category" name="name" value="<%= (editcat!='')?editcat.name:'' %>">
                   </div>
                   
                   
@@ -69,7 +67,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <% catdata.map((i)=>{ %>
+                    <% alldata.map((i)=>{ %>
                       <tr>
                         <td><%= i._id%></td>
                         <td><%= i.name%></td>

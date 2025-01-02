@@ -1,28 +1,21 @@
-const { MongoClient } = require('mongodb');
-// or as an es module:
-// import { MongoClient } from 'mongodb'
+const mongoose = require('mongoose');
 
-// Connection URL
-const url = 'mongodb://localhost:27017';
-const client = new MongoClient(url);
 
-let db
-// Database Name
-const dbName = 'ejsproject';
-
-async function connenctDatabase() {
-  // Use connect method to connect to the server
-    if(!db){
-      try {
-        await client.connect();
-        console.log('Connected Successfully to SERVER');
-        db = client.db(dbName)
-      } catch (error) {
-        console.log('Failed to connect to MongoDB', error)
-        throw error;
-      }
-    }
-    return db
+async function connectToDatabase() {
+    try {
+        await mongoose.connect('mongodb://127.0.0.1/nodebatch9to10');
+        console.log('Connected successfully to server');
+    } catch (err) {
+        console.error('Failed to connect to MongoDB:', err);
+        throw err;
+    }  
 }
+connectToDatabase()
+const Schema = mongoose.Schema;
+const catSchema = new Schema({
+    name: String
+  });
 
-module.exports = connenctDatabase
+let catModel =  mongoose.model('category', catSchema);
+module.exports = catModel;
+

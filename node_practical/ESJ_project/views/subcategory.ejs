@@ -27,32 +27,34 @@
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">subcategory</h3>
+                <h3 class="card-title">Subsubcategory</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-
-              <!-- FORM FOR ADDING A DATA  ******* -->
-              <form action="/subcategory/add   " method="post">
-                <input type="hidden" name="subcatid" value="<%= (editsubcat)?editsubcat._id:'' %>">
+              <form action="/subcategory/add" method="post">
+                <input type="hidden" name="subcatid" value="<%= (editsubcat)?editsubcat._id:''%>">
                 <div class="card-body">
-                  <div class="form-group">
+                  <!-- <div class="form-group">
                     <label for="exampleInputEmail1">Category Name</label>
-                    <select name="category" id="category" name="category">
-                      <option value="">--category--</option>
-                      <option value="">ronak</option>
-                      <option value="">vivek</option>
-                      <option value="">jay</option>
-                      <option value="">ajay</option>
-                      <option value="">vijay</option>
+                    <select name="category" id="category" class="form-control">
+                      <option value="">Select Category</option>
                     </select>
+                  </div> -->
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">category Name</label>
+                    <select name="category" class="form-control">
+                        <option value="">--Select Category--</option>
+                        <% catdata.map((i)=>{ %>
+                          <option value="<%= i._id%>"><%= i.name%></option>
+                       <% })%>
+
+                    </select>
+                    <!-- <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter category" name="category" value="<%= (editsubcat)?editsubcat.category:''%>"> -->
                   </div>
                   <div class="form-group">
                     <label for="exampleInputEmail1">Subcategory Name</label>
                     <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter subcategory" name="name" value="<%= (editsubcat)?editsubcat.name:''%>">
                   </div>
-                  
-                  
                 </div>
                 <!-- /.card-body -->
 
@@ -81,17 +83,17 @@
                     </tr>
                   </thead>
                   <tbody>
-                   <% alldata.map((i) => { %>
-                    <tr>
+                    <% alldata.map((i)=>{  %>
+                      <tr>
                         <td><%= i._id %></td>
                         <td><%= i.category %></td>
                         <td><%= i.name %></td>
                         <td>
-                          <button class="btn btn-primary" href="/edit/<%= i._id %>">Edit</button>
-                          <button class="btn btn-danger" href="/del/<%= i._id %>">Delete</button>
+                          <a href="/subcategory/edit/<%= i._id %>" class="btn btn-primary">Edit </a>
+                          <a href="/subcategory/del/<%= i._id %>" class="btn btn-danger">Delete</a>
                         </td>
-                    </tr>
-                   <% }) %>
+                      </tr>
+                    <% }) %>
                   </tbody>
                 </table>
               </div>
