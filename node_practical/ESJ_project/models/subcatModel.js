@@ -1,4 +1,5 @@
-const mongoose = require('mongoose');
+// connect mongoose...
+const mongoose = require('mongoose')
 
 // model async func to create switchON typeOF means connection are ON or OFF
 async function connectToDatabase() {
@@ -16,10 +17,15 @@ connectToDatabase();
 // Create Model with Mongoose Schema
 const Schema = mongoose.Schema;
 const SubcatSchema = new Schema({
-    category: String,
+    categories:{
+        type : Schema.Types.ObjectId,
+        ref:"category"
+    },
     name: String
   });
 
 let subcatModel =  mongoose.model('subcategory', SubcatSchema);
+
+// export module
 module.exports = subcatModel;
 

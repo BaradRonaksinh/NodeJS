@@ -5,7 +5,7 @@ const app = express()
 const router = express.Router()
 
 
-// all func in router works
+// all func in router works..
 router.get('/',disp)
 router.post('/add',ins)
 router.get('/del/:id',delData)

@@ -1,8 +1,13 @@
+//MongoClient is used to establish a connection between your Node.js application and a MongoDB database server. 
 const { MongoClient } = require('mongodb');
 // or as an es module:
 // import { MongoClient } from 'mongodb'
 
+// -----------------------------------------------------------------------------------------------//
 // Connection URL
+
+// The url variable is expected to be a connection string (URI) that specifies the address of your MongoDB server or cluster.
+// It often includes authentication credentials, the database host, and additional options.
 const url = 'mongodb://localhost:27017';
 const client = new MongoClient(url);
 
