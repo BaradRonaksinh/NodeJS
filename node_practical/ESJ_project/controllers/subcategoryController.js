@@ -8,6 +8,8 @@ const { all } = require('../routes/catRoutes');
 const ins = async (req, res) => {
     const id = req.body.subcatid    //req.body ?
     let alldata = req.body
+    console.log(req.file);
+
     let result
     if (id != '') {
         result = await subcatModel.findByIdAndUpdate(id, alldata)

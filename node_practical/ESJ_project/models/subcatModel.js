@@ -17,8 +17,8 @@ connectToDatabase();
 // Create Model with Mongoose Schema
 const Schema = mongoose.Schema;
 const SubcatSchema = new Schema({
-    categories:{
-        type : Schema.Types.ObjectId,
+    categories: {
+        type:Schema.Types.ObjectId,
         ref:"category"
     },
     name: String
