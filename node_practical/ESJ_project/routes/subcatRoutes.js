@@ -3,7 +3,7 @@ const app = express()
 const multer = require('multer')
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'upload')
+        cb(null, 'public/upload')
     },
     //genrate the file name... in diskstorage
     filename: function (req, file, cb) {

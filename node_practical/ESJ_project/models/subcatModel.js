@@ -21,7 +21,8 @@ const SubcatSchema = new Schema({
         type:Schema.Types.ObjectId,
         ref:"category"
     },
-    name: String
+    name:String,
+    image:String
   });
 
 let subcatModel =  mongoose.model('subcategory', SubcatSchema);

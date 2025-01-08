@@ -1,6 +1,8 @@
 const { ObjectId } = require('mongodb');
 const subcatModel = require('../models/subcatModel');
 const catModel = require('../models/catModel')
+const fs = require('fs')
+
 const { all } = require('../routes/catRoutes');
 
 
@@ -8,6 +10,7 @@ const { all } = require('../routes/catRoutes');
 const ins = async (req, res) => {
     const id = req.body.subcatid    //req.body ?
     let alldata = req.body
+    alldata.image = req.file.filename
     console.log(req.file);
 
     let result
@@ -43,7 +46,16 @@ const delData = async (req, res) => {
     // const collection = db.collection('category')
     // let objectId = new ObjectId(id)
     // console.log(objectId);
-
+    let editdata = await subcatModel.findById(id)
+    if(editdata.image){
+        fs.unlink("./public/uploads/"+editdata.image, (err) => {
+            if(err){
+                console.log(err);
+                return;
+            }
+            console.log('File deleted successfully');
+        })
+    }
     let data = await subcatModel.findByIdAndDelete(id)
     if (data) {
         res.redirect('/subcategory')
